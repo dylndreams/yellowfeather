@@ -15,7 +15,7 @@
 * can load sprites from memory 
 * can flag sprites
 * possibly support more than 256 colors
-* 
+
 
 ### AUDIO
 * 4 PCM Channels
