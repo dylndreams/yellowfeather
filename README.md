@@ -18,9 +18,8 @@
 
 
 ### AUDIO
-* 4 PCM Channels
-* 4 synthesis channels 
-* supports midi
+* Supports .MOD files
+* supports MIDI
 * supports reverb, pitch, pan, ASDR, and fadein/out
 * can loop samples
 
