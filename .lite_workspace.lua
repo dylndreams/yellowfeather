@@ -1,1 +1,0 @@
-return {["views"]={[1]={["selection"]={[1]=29,[2]=2,[3]=29,[4]=2},["scroll"]={["x"]=0,["y"]=350},["active"]=false,["text"]=false,["type"]="doc",["filename"]="src/main.c"},[2]={["selection"]={[1]=1,[2]=1,[3]=1,[4]=1},["scroll"]={["x"]=0,["y"]=1250},["active"]=true,["text"]=false,["type"]="doc",["filename"]="src/include/kit.h"}},["type"]="leaf",["active_view"]=2}
