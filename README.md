@@ -1,4 +1,4 @@
- ## the yellowfeather fantasy console 
+# the yellowfeather fantasy console 
  A 4th generation console inspired by the SNES and Genesis.
 (The rest of this README is basically jotting down things I wanna add. not all will make it and many will change.)
 
