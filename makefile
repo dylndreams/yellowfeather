@@ -1,6 +1,6 @@
 CC = gcc
-SRCS = src/main.c
-LDFLAGS = -Llibs/z8lua -llua -lSDL2 -lmodplug -lm -lc -g
+SRCS = src/main.c src/renderer.c src/audio.c src/input.c
+LDFLAGS = -Llibs/z8lua -llua -lSDL2 -lm -lc -g
 CFLAGS = -std=c99 -Oz -s -g
 
 msg ?= $(shell bash -c 'read -p "COMMITMSG:" msg; echo $$msg')

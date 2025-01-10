@@ -1,4 +1,4 @@
-// kit v0.1.7 | public domain - no warranty implied; use at your own risk
+// kit v0.1.7 by rxi | public domain - no warranty implied; use at your own risk
 #ifndef KIT_H
 #define KIT_H
 
@@ -12,7 +12,6 @@
 #include <time.h>
 #include <math.h>
 #include <SDL2/SDL.h>
-#include <libmodplug/modplug.h>
 
 /* These are the flags that go to the kit_create function.
 If you want more than one then do: KIT_SCALE2X | KITHIDECURSOR.
@@ -347,8 +346,6 @@ kit_Context* kit_create(const char *title, int w, int h, int flags) {
           ctx->fmt.channels  = 2;
           ctx->fmt.samples   = 1024;
           ctx->fmt.callback  = NULL;
-
-          audio_mutex = SDL_CreateMutex();
 
         // Initialize audio
         ctx->dev = SDL_OpenAudioDevice(NULL, 0, &ctx->fmt, &ctx->got, 0);
