@@ -26,7 +26,9 @@ All i have right now is somewhat of a renderer. Doesnt have any of the specs bel
 
 ### AUDIO
 
-* Supports .MOD files
+* 4 FM Channels
+* $ PCM Channels
+* Supports Tapestream (you'll understand it later)
 * supports MIDI
 * supports reverb, pitch, pan, ASDR, and fadein/out
 * can loop samples
