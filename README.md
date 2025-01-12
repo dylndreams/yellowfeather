@@ -35,6 +35,6 @@ All i have right now is somewhat of a renderer. Doesnt have any of the specs bel
 
 ### INPUT
 
-* 6 face buttons 
+* 4 face buttons 
 * dpad but can support joystick 
-* 2 bumpers
+* 2 velocity triggers
