@@ -27,7 +27,7 @@ All i have right now is somewhat of a renderer. Doesnt have any of the specs bel
 ### AUDIO
 
 * 4 FM Channels
-* $ PCM Channels
+* 4 PCM Channels
 * Supports Tapestream (you'll understand it later)
 * supports MIDI
 * supports reverb, pitch, pan, ASDR, and fadein/out
