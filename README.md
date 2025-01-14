@@ -11,7 +11,6 @@ All i have right now is somewhat of a renderer. Doesnt have any of the specs bel
 
 * 256KB of RAM
 * 128KB of VRAM
-* 128KB of SRAM
 * Resolution: 256x192
 
 ### GRAPHICS
