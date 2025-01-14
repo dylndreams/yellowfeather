@@ -2,6 +2,3 @@
 	path = libs/z8lua
 	url = https://github.com/samhocevar/z8lua.git
 	branch = pico8
-[submodule "libs/libmodplug"]
-	path = libs/libmodplug
-	url = https://github.com/Konstanty/libmodplug.git

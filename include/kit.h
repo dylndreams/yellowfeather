@@ -1,4 +1,4 @@
-// kit v0.1.7 by rxi | public domain - no warranty implied; use at your own risk
+// kit v0.1.7 | public domain - no warranty implied; use at your own risk
 #ifndef KIT_H
 #define KIT_H
 
@@ -12,6 +12,7 @@
 #include <time.h>
 #include <math.h>
 #include <SDL2/SDL.h>
+#include "cmixer.h"
 
 /* These are the flags that go to the kit_create function.
 If you want more than one then do: KIT_SCALE2X | KITHIDECURSOR.
@@ -58,6 +59,7 @@ typedef struct {
     SDL_AudioSpec fmt, got;
 } kit_Context;
 
+static SDL_mutex* audio_mutex;
 
 #define kit_max(a, b) ((a) > (b) ? (a) : (b))
 #define kit_min(a, b) ((a) < (b) ? (a) : (b))
@@ -134,7 +136,14 @@ int  kit_draw_text(kit_Context *ctx, kit_Color color, char *text, int x, int y);
 int  kit_draw_text2(kit_Context *ctx, kit_Color color, kit_Font *font, char *text, int x, int y);
 
 // AUDIO
-
+cm_Source* kit_load_audio(char *filename);
+void kit_play_audio(cm_Source* src, int volume, bool loop);
+void kit_free_audio(cm_Source* src);
+void kit_pause_audio(cm_Source* src);
+void kit_stop_audio(cm_Source* src);
+void kit_set_pan(cm_Source* src, int pan);
+void kit_set_pitch(cm_Source* src, int pitch);
+int kit_audio_state(cm_Source* src);
 
 #endif // KIT_H
 
@@ -304,7 +313,19 @@ static void kit__wndproc(kit_Context *ctx, SDL_Event *e) {
 
 }
 
+static void lock_handler(cm_Event *e) {
+  if (e->type == CM_EVENT_LOCK) {
+    SDL_LockMutex(audio_mutex);
+  }
+  if (e->type == CM_EVENT_UNLOCK) {
+    SDL_UnlockMutex(audio_mutex);
+}
+}
 
+
+static void audio_callback(void *udata, Uint8 *stream, int size) {
+  cm_process((void*) stream, size / 2);
+}
 
 
 static void *kit__font_png_data;
@@ -312,7 +333,7 @@ static int   kit__font_png_size;
 
 kit_Context* kit_create(const char *title, int w, int h, int flags) {
     kit_Context *ctx = kit__alloc(sizeof(kit_Context));
-    printf("Welcome to KIT!\n");
+    printf("Welcome to KIT!.\n");
     ctx->screen = kit_create_image(w, h);
     ctx->step_time = kit__flags_to_step_time(flags);
     ctx->hide_cursor = !!(flags & KIT_HIDECURSOR);
@@ -345,7 +366,13 @@ kit_Context* kit_create(const char *title, int w, int h, int flags) {
           ctx->fmt.format    = AUDIO_S16;
           ctx->fmt.channels  = 2;
           ctx->fmt.samples   = 1024;
-          ctx->fmt.callback  = NULL;
+          ctx->fmt.callback  = audio_callback;
+
+          audio_mutex = SDL_CreateMutex();
+          /* Init library */
+          cm_init(ctx->fmt.freq);
+          cm_set_lock(lock_handler);
+          cm_set_master_gain(1.0);
 
         // Initialize audio
         ctx->dev = SDL_OpenAudioDevice(NULL, 0, &ctx->fmt, &ctx->got, 0);
@@ -728,6 +755,75 @@ int kit_draw_text2(kit_Context *ctx, kit_Color color, kit_Font *font, char *text
 // AUDIO | uses cmixer : https://github.com/rxi/cmixer
 //////////////////////////////////////////////////////////////////////////////
 
+cm_Source* kit_load_audio(char *filename) {
+    return cm_new_source_from_file(filename);
+}
+
+void kit_play_audio(cm_Source* src, int volume, bool loop) {
+    if (!src) {
+    printf("Error loading audio: %s\n", cm_get_error());
+    fflush(stdout);
+    } else {
+     cm_set_gain(src, volume);
+     cm_set_loop(src, loop);
+     cm_play(src);
+    }
+}
+
+void kit_free_audio(cm_Source* src) {
+   if (!src) {
+    printf("Error freeing audio: %s\n", cm_get_error());
+    fflush(stdout);
+    } else {
+    cm_destroy_source(src);
+    }
+}
+
+void kit_pause_audio(cm_Source* src) {
+   if (!src) {
+    printf("Error pausing audio: %s\n", cm_get_error());
+    fflush(stdout);
+    } else {
+    cm_pause(src);
+    }
+}
+
+void kit_stop_audio(cm_Source* src) {
+   if (!src) {
+    printf("DONT STOP THE MUSIC!: %s\n", cm_get_error());
+    fflush(stdout);
+    } else {
+    cm_stop(src);
+    }
+}
+
+void kit_set_pan(cm_Source* src, int pan) {
+   if (!src) {
+    printf("Error panning audio: %s\n", cm_get_error());
+    fflush(stdout);
+    } else {
+    cm_set_pan(src, pan);
+    }
+}
+
+void kit_set_pitch(cm_Source* src, int pitch) {
+   if (!src) {
+    printf("Error pitching audio: %s\n", cm_get_error());
+    fflush(stdout);
+    } else {
+    cm_set_pitch(src, pitch);
+    }
+}
+
+int kit_audio_state(cm_Source* src) {
+    if (!src) {
+    printf("Error fetching audio state: %s\n", cm_get_error());
+    fflush(stdout);
+    return 0;
+    } else {
+    cm_get_state(src);
+    }
+}
 
 //////////////////////////////////////////////////////////////////////////////
 // PNG loader | borrowed from tigr : https://github.com/erkkah/tigr

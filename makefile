@@ -1,6 +1,6 @@
 CC = gcc
-SRCS = src/main.c src/renderer.c src/audio.c src/input.c
-LDFLAGS = -Llibs/z8lua -llua -lSDL2 -lm -lc -g
+SRCS = src/main.c src/audio.c
+LDFLAGS = -Llibs/z8lua -llua -lSDL2 -lm -lc -g -Iinclude
 CFLAGS = -std=c99 -Oz -s -g
 
 msg ?= $(shell bash -c 'read -p "COMMITMSG:" msg; echo $$msg')
@@ -11,7 +11,7 @@ run: build
 	@./build.out
 
 build: $(SRCS)
-	@$(CC) $< $(LDFLAGS) $(CFLAGS) -o build.out
+	@$(CC) $(SRCS) $(LDFLAGS) $(CFLAGS) -o build.out
 
 commit:
 	@git add .
