@@ -9,7 +9,6 @@ All i have right now is somewhat of a renderer. Doesnt have any of the specs bel
 
 ### MISC. SPECS 
 
-* 8M vm insts/sec
 * 256KB of RAM
 * 128KB of VRAM
 * 128KB of SRAM
@@ -26,12 +25,7 @@ All i have right now is somewhat of a renderer. Doesnt have any of the specs bel
 
 ### AUDIO
 
-* 4 FM Channels
-* 4 PCM Channels
-* Supports Tapestream (you'll understand it later)
-* supports MIDI
-* supports reverb, pitch, pan, ASDR, and fadein/out
-* can loop samples
+* Can stream from tape (as in a cassette, talk bout that later)
 
 ### INPUT
 
