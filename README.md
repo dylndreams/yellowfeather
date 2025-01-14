@@ -9,7 +9,6 @@ All i have right now is somewhat of a renderer. Doesnt have any of the specs bel
 
 ### MISC. SPECS 
 
-* 8M vm insts/sec
 * 256KB of RAM
 * 128KB of VRAM
 * 128KB of SRAM
