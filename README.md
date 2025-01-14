@@ -24,7 +24,7 @@ All i have right now is somewhat of a renderer. Doesnt have any of the specs bel
 
 ### AUDIO
 
-* Can stream from tape (as in a cassette, talk bout that later)
+* Can stream from tape. this gets explained (here)[docs/CASSETTE.md]
 
 ### INPUT
 
