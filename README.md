@@ -7,27 +7,13 @@ A 4th generation console inspired by the SNES and Genesis.
 
 All i have right now is somewhat of a renderer. Doesnt have any of the specs below but all it can do is render.
 
-### MISC. SPECS 
+### SPECS 
 
 * 256KB of RAM
 * 128KB of VRAM
-* Resolution: 256x192
-
-### GRAPHICS
-
+* Resolution: 256x19
 * tilemap based
-* uses spritesheets
-* can load sprites from memory 
-* can flag sprites
-* possibly support more than 256 colors
-
-
-### AUDIO
-
 * Can stream from tape. this gets explained [here](docs/CASSETTE.md)
-
-### INPUT
-
 * 4 face buttons 
 * dpad but can support joystick 
 * 2 velocity triggers
